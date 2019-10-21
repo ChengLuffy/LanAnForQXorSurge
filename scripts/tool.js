@@ -10,14 +10,15 @@ function getData() {
             }
 
             $ui.alert({
-                title: "请选择导出为哪种格式",
+                title: "蓝岸已支持 Quantumult-X 节点订阅（方式4）",
                 message: "",
-                actions: [{
-                        title: "Quantumult-X",
-                        handler: function() {
-                            dealForQX(resp);
-                        }
-                    },
+                actions: [
+                    // {
+                    //     title: "Quantumult-X",
+                    //     handler: function() {
+                    //         dealForQX(resp);
+                    //     }
+                    // },
                     {
                         title: "Surge 4",
                         handler: function() {
