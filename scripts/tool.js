@@ -25,6 +25,12 @@ function getData() {
                         }
                     },
                     {
+                        title: "Surge 4 file list",
+                        handler: function() {
+                            dealForSurgeList(resp);
+                        }
+                    },
+                    {
                         title: "取消",
                         handler: function() {}
                     }
@@ -67,7 +73,7 @@ function dealForQX(resp) {
 
 function dealForSurge(resp) {
     let ret = "";
-    let nodesName = "\n\nlanan = select, ";
+    let nodesName = "\n\nlanan =  select, ";
 
     let str = $text.base64Decode(resp.data);
     let nodes = str.split("vmess://");
@@ -86,7 +92,7 @@ function dealForSurge(resp) {
                 json.port +
                 ", username=" +
                 json.id +
-                ", tls=" +
+                ", tfo=true, tls=" +
                 (json.tls == "tls" ? "true" : "false") +
                 "\n";
             ret += node;
@@ -97,6 +103,36 @@ function dealForSurge(resp) {
     ret += "\n\n[Proxy Group]\n" + nodesName;
 
     createSurgeConfig(ret);
+}
+
+function dealForSurgeList(resp) {
+    let ret = "";
+
+    let str = $text.base64Decode(resp.data);
+    let nodes = str.split("vmess://");
+
+    for (let index = 0; index < nodes.length; index++) {
+        let element = nodes[index];
+        if (element.length != 0) {
+            let json = JSON.parse($text.base64Decode(element));
+            // chacha20-ietf-poly1305
+            $console.info(json);
+            let node =
+                json.ps +
+                " = vmess, " +
+                json.add +
+                ", " +
+                json.port +
+                ", username=" +
+                json.id +
+                ", tfo=true, tls=" +
+                (json.tls == "tls" ? "true" : "false") +
+                "\n";
+            ret += node;
+        }
+    }
+
+    $share.sheet(["lanan.txt", $data({ string: ret })]);
 }
 
 function createSurgeConfig(str) {
