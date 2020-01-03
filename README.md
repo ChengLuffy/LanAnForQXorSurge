@@ -4,4 +4,4 @@
 
 # 没有其他机场可以测试，您可以自己尝试其他机场看是否能够使用
 
-# 也可以通过 [lanan_sub_for_surge.py](lanan_sub_for_surge.py) 结合 crontab 实现 订阅
+# 也可以通过 [lanan_sub_for_surge.py](https://github.com/ChengLuffy/lanan_scripting_for_surge) 结合 crontab 实现 订阅
